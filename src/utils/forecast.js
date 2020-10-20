@@ -22,7 +22,8 @@ const forecast = (lat, lon, callback) => {
     callback(undefined, {
       currentConditions: data.weather_descriptions[0],
       temperature: data.temperature,
-      apparentTemperature: data.feelslike 
+      apparentTemperature: data.feelslike,
+      humidity: data.humidity
     })
     }
   })

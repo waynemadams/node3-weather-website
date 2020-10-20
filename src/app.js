@@ -55,7 +55,10 @@ app.get('/weather', (req, resp) => {
     if (error) {
       return resp.send({ error })
     } else {
-      forecast(lat, lon, (error, {currentConditions: current, temperature:temp, apparentTemperature:feelsLikeTemp}) => {
+      forecast(lat, lon, (error, {currentConditions: current,
+                                  temperature: temp,
+                                  apparentTemperature: feelsLikeTemp,
+                                  humidity: humidity}) => {
         if (error) {
           return resp.send({ error })
         } else {
@@ -63,7 +66,8 @@ app.get('/weather', (req, resp) => {
             location: location,
             current: current,
             temp: temp,
-            feelsLikeTemp: feelsLikeTemp
+            feelsLikeTemp: feelsLikeTemp,
+            humidity: humidity
           })
         }
       })

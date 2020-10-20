@@ -1,25 +1,32 @@
 const weatherForm = document.querySelector('form')
 const search = document.querySelector('input')
-const messageOne = document.querySelector('#message-1')
-const messageTwo = document.querySelector('#message-2')
+const loc = document.querySelector('#loc')
+const conditions = document.querySelector('#conditions')
+const temperature = document.querySelector('#temperature')
+const apparentTemp = document.querySelector('#apparentTemp')
+const humidity = document.querySelector('#humidity')
 
-messageOne.textContent = ''
+loc.textContent = ''
 
 weatherForm.addEventListener('submit', (e) => {
   e.preventDefault()
   const city = search.value
   const url = '/weather?address=' + city
-  messageOne.textContent = 'Loading...'
-  messageTwo.textContent = ''
+  loc.textContent = 'Loading...'
+  conditions.textContent = ''
+  temperature.textContent = ''
+  apparentTemp.textContent = ''
+  humidity.textContent = ''
   fetch(url).then((resp) => {
     resp.json().then((data) => {
       if (data.error) {
-        messageOne.textContent = 'Error for location "' + city + '": ' + data.error
+        loc.textContent = 'Error for location "' + city + '": ' + data.error
       } else {
-        messageOne.textContent = ''
-        messageTwo.textContent = 'location: ' + data.location +
-          '; currentConditions: ' + data.current + '; temperature: ' + data.temp +
-          '; apparentTemperature: ' + data.feelsLikeTemp
+        loc.textContent = 'location: ' + data.location
+        conditions.textContent = 'current conditions: ' + data.current
+        temperature.textContent = 'temperature: ' + data.temp
+        apparentTemp.textContent = 'apparent temperature: ' + data.feelsLikeTemp
+        humidity.textContent = 'relative humidity: ' + data.humidity + '%'
       }
     })
   })
